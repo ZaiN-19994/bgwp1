@@ -29,7 +29,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      font-size: 4rem;
+      font-size: 3rem;
       opacity: 0;
       animation: fadeIn 2s ease 3s forwards;
     }
@@ -44,7 +44,8 @@
 <body>
   <canvas id="matrix"></canvas>
   <div class="message">🔹🪄🔹</div>
-  <audio id="doll-sound" src="https://www.myinstants.com/media/sounds/squid-game-doll-music.mp3" preload="auto"></audio>
+  <audio id="doll-sound" src="https://cdn.pixabay.com/download/audio/2021/09/13/audio_7c36f6bb9f.mp3?filename=squid-game-doll-sound-120983.mp3" preload="auto"></audio>
+  <audio id="hacking-sound" src="https://sounds.pond5.com/computer-beep-boop-hacking-sounds-sound-effect-296926349_nw_prev.m4a" preload="auto"></audio>
 
   <script>
     // Matrix background animation (dark blue)
@@ -85,11 +86,16 @@
       height = canvas.height = window.innerHeight;
     });
 
-    // Play Squid Game doll sound after few seconds
+    // Play sounds after page loads
     window.addEventListener('load', () => {
       setTimeout(() => {
-        const audio = document.getElementById("doll-sound");
-        audio.play().catch(e => console.log("Audio play blocked: ", e));
+        const audio1 = document.getElementById("doll-sound");
+        audio1.play().catch(e => console.log("Audio1 play blocked: ", e));
+
+        setTimeout(() => {
+          const audio2 = document.getElementById("hacking-sound");
+          audio2.play().catch(e => console.log("Audio2 play blocked: ", e));
+        }, 2500); // Play second sound 2.5s after the first
       }, 2500);
     });
   </script>
