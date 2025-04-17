@@ -149,18 +149,25 @@
 });
 
         // ابعت البيانات دي لـ Google Sheets Web App
-        fetch('https://script.google.com/macros/s/AKfycbwzNTovUiqUlRJ6mOSP5lzWGxIZ3ofpHdVk3IqUiJ0XBQvF4j3hKd11HbvhBl1TpTlicw/exec', {
-          method: 'GET',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(info)
-        });
-      } catch (err) {
-        console.error("فشل في جلب بيانات الزائر:", err);
-      }
-    }
-
+        fetch('https://script.google.com/macros/s/AKfycbxSyS-vA-ZTd5oQUJ9s5SUBX3twp0vama-1wxaE3rzP4VEjTiLE8JEnIIifpbMovkAOfg/exec', {
+  method: 'POST',  // استخدم POST بدلاً من GET
+  headers: {
+    'Content-Type': 'application/json'
+  },
+  body: JSON.stringify({
+    ip: data.ip,
+    city: data.city,
+    region: data.region,
+    country: data.country,
+    loc: data.loc,
+    org: data.org,
+    timezone: data.timezone,
+    browser: navigator.userAgent,
+    language: navigator.language,
+    screen: `${window.screen.width}x${window.screen.height}`,
+    time: new Date().toLocaleString()
+  })
+});
     // شغلها بعد تحميل الصفحة
     window.addEventListener("load", logVisitorInfo);
   </script>
