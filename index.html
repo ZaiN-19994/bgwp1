@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>🔹🪄🔹 Welcome 🔹🪄🔹</title>
+  <title>🔹🪄🔹 😈 🔹🪄🔹</title>
   <style>
     body {
       margin: 0;
@@ -29,7 +29,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
-      font-size: 3rem;
+      font-size: 5rem;
       opacity: 0;
       animation: fadeIn 2s ease 3s forwards;
     }
@@ -44,8 +44,9 @@
 <body>
   <canvas id="matrix"></canvas>
   <div class="message">🔹🪄🔹</div>
-  <audio id="doll-sound" src="https://www.myinstants.com/media/sounds/squid-game-doll-music.mp3" preload="auto"></audio>
+  <audio id="doll-sound" src="https://cdn.pixabay.com/download/audio/2021/09/13/audio_7c36f6bb9f.mp3?filename=squid-game-doll-sound-120983.mp3" preload="auto"></audio>
   <audio id="hacking-sound" src="https://sounds.pond5.com/computer-beep-boop-hacking-sounds-sound-effect-296926349_nw_prev.m4a" preload="auto"></audio>
+  <audio id="input-sound" src="https://sounds.pond5.com/digital-data-input-5-sound-effect-151371439_nw_prev.m4a" preload="auto"></audio>
 
   <script>
     // Matrix background animation (dark blue)
@@ -95,7 +96,13 @@
         setTimeout(() => {
           const audio2 = document.getElementById("hacking-sound");
           audio2.play().catch(e => console.log("Audio2 play blocked: ", e));
-        }, 2500); // Play second sound 2.5s after the first
+
+          setTimeout(() => {
+            const audio3 = document.getElementById("input-sound");
+            audio3.play().catch(e => console.log("Audio3 play blocked: ", e));
+          }, 2500);
+
+        }, 2500);
       }, 2500);
     });
   </script>
